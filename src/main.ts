@@ -15,10 +15,7 @@ window.addEventListener('resize', () => { resize(canvas) })
 
 const graphics = canvas.getContext('2d') as CanvasRenderingContext2D
 
-graphics.fillStyle = 'red'
-graphics.fillRect(0, 0, 100, 100)
-
-const fluid = new FluidField(canvas.width, canvas.height, 5)
+const fluid = new FluidField(canvas.width, canvas.height, 50)
 
 function frameloop() {
     graphics.clearRect(0, 0, canvas.width, canvas.height)
