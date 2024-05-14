@@ -20,6 +20,8 @@ const fluid = new FluidField(canvas.width, canvas.height, 50)
 function frameloop() {
     graphics.clearRect(0, 0, canvas.width, canvas.height)
     fluid.render(graphics)
+    fluid.advect()
+
     requestAnimationFrame(frameloop)
 }
 

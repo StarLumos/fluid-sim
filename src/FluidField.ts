@@ -1,6 +1,7 @@
 import { Vector } from "./Vector"
 import { RGBa } from "./RGBa"
-import { randomrange } from "./utilities"
+import { handleAngles } from "./advect"
+import { randomrange, degrees } from "./utilities"
 
 class Cell {
     constructor(
@@ -34,21 +35,18 @@ class FluidField {
         }
     }
     diffuse() {   
-
+        // "blocky" diffuse or "linear" diffuse?
     }
     advect() {
+        let functions: (() => void)[] = []
         for (let r = 0; r < this.grid.length; r++) {
             for (let c = 0; c < this.grid[r].length; c++) {
                 let current = this.grid[r][c]
-                if (Math.abs(current.velocity.x) == Math.abs(current.velocity.y)) {
-                    if (current.velocity.x < 0 && current.velocity.y > 0) {
-                        this.grid[r-1][c-1].velocity
-                            = this.grid[r-1][c-1].velocity.add(
-                                current.velocity.multiply(0.5))
-                        current.velocity = current.velocity.multiply(0.5)
-                    }
-                }
+                handleAngles(functions, this.grid, current, r, c)
             }
+        }
+        for (const fn of functions) {
+            fn()
         }
     }
     render(graphics: CanvasRenderingContext2D) {
@@ -72,4 +70,4 @@ class FluidField {
     }
 }
 
-export { FluidField }
+export { Cell, FluidField }
