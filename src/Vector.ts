@@ -1,8 +1,10 @@
+import { degrees, radians } from "./utilities"
+
 class Vector{
     private _x: number
     private _y: number
     private _magnitude: number
-    private _angle: number
+    private _angle: degrees
 
     constructor(x: number, y: number) {
         this._x = x
@@ -70,6 +72,9 @@ class Vector{
         if (this.magnitude > maximum)
             copy.magnitude = maximum
         return copy
+    }
+    stringify(): string {
+        return `[${this.x}, ${this.y}]`
     }
 }
 

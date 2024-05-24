@@ -2,8 +2,19 @@ function randomrange(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function degrees(degree: number) {
-    return degree * Math.PI / 180
+type radians = number
+type degrees = number
+
+function radians(radians: number): degrees {
+    const result = radians * (180/Math.PI)
+    if (result >= 0)
+        return result
+    else
+        return result + 360
 }
 
-export { randomrange, degrees }
+function degrees(degrees: number): radians {
+    return degrees * (Math.PI/180)
+}
+
+export { randomrange, radians, degrees }
